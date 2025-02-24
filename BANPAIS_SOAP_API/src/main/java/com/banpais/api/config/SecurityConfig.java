@@ -1,5 +1,6 @@
 package com.banpais.api.config; // Cambia el paquete
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -16,24 +17,29 @@ import static org.springframework.security.config.Customizer.withDefaults;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
+    
+       @Value("${spring.security.user.name}") 
+    private String username;
+
+    @Value("${spring.security.user.password}") 
+    private String password;
+
 
     @Bean
     public InMemoryUserDetailsManager userDetailsService(PasswordEncoder passwordEncoder) {
-        UserDetails user = User.withUsername("usuario")
-                .password(passwordEncoder.encode("contrasena")) // ¡NO uses contraseñas en texto plano en producción!
-                .roles("USER") // Asigna roles/permisos según sea necesario
+        UserDetails user = User.withUsername(username)
+                .password(passwordEncoder.encode(password))
+                .roles("USER") 
                 .build();
-
-        // Puedes agregar más usuarios aquí
         return new InMemoryUserDetailsManager(user);
     }
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-            .csrf(AbstractHttpConfigurer::disable) // Desactiva CSRF *solo* si estás seguro de que no lo necesitas (común en servicios SOAP)
+            .csrf(AbstractHttpConfigurer::disable) 
             .authorizeHttpRequests(authz -> authz
-                .requestMatchers("/**").authenticated() // Protege todos los endpoints
+                .requestMatchers("/**").authenticated() 
                 //.requestMatchers("/public/**").permitAll() // Ejemplo: Permite acceso sin autenticación a /public/**
                 //.anyRequest().authenticated()  // Otra forma de proteger todos los endpoints
             )
@@ -43,6 +49,6 @@ public class SecurityConfig {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder(); // Usa un codificador de contraseñas seguro
+        return new BCryptPasswordEncoder();
     }
 }
