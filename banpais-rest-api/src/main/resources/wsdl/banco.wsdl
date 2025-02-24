@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:sch="http://www.example.com/banco" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.example.com/banco" targetNamespace="http://www.example.com/banco">
+  <wsdl:types>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://www.example.com/banco">
+
+    <!--  Solicitud para registrar un movimiento -->
+    <xs:element name="registrarMovimientoRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="trama" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <!-- Respuesta para registrar un movimiento -->
+    <xs:element name="registrarMovimientoResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="trama" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <!--  Solicitud para registrar un cliente -->
+    <xs:element name="registrarClienteRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="trama" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+	<!--  Respuesta para registrar un Cliente -->
+    <xs:element name="registrarClienteResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="codigo" type="xs:string"/>
+				<xs:element name="mensaje" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+	
+    <!--  Solicitud para actualizar un cliente -->
+	<xs:element name="actualizarClienteRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="trama" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+	
+	    <!--  Respuesta para actualizar un Cliente -->
+    <xs:element name="actualizarClienteResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="codigo" type="xs:string"/>
+				<xs:element name="mensaje" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <!--  Solicitud para eliminar un cliente -->
+	<xs:element name="eliminarClienteRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="trama" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+	
+	    <!--  Respuesta para eliminar un Cliente -->
+    <xs:element name="eliminarClienteResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="codigo" type="xs:string"/>
+				<xs:element name="mensaje" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+	
+	
+	 <!--  Solicitud para registrar una cuenta -->
+    <xs:element name="registrarCuentaRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="trama" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+	<!--  Respuesta para registrar una cuenta -->
+    <xs:element name="registrarCuentaResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="codigo" type="xs:string"/>
+				<xs:element name="mensaje" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+	
+    <!--  Solicitud para actualizar una cuenta -->
+	<xs:element name="actualizarCuentaRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="trama" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+	
+	    <!--  Respuesta para actualizar una cuenta -->
+    <xs:element name="actualizarCuentaResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="codigo" type="xs:string"/>
+				<xs:element name="mensaje" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <!--  Solicitud para eliminar una cuenta -->
+	<xs:element name="eliminarCuentaRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="trama" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+	
+	    <!--  Respuesta para eliminar una cuenta -->
+    <xs:element name="eliminarCuentaResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="codigo" type="xs:string"/>
+				<xs:element name="mensaje" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="actualizarClienteRequest">
+    <wsdl:part element="tns:actualizarClienteRequest" name="actualizarClienteRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="actualizarCuentaResponse">
+    <wsdl:part element="tns:actualizarCuentaResponse" name="actualizarCuentaResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="registrarCuentaRequest">
+    <wsdl:part element="tns:registrarCuentaRequest" name="registrarCuentaRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="registrarMovimientoRequest">
+    <wsdl:part element="tns:registrarMovimientoRequest" name="registrarMovimientoRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="eliminarCuentaRequest">
+    <wsdl:part element="tns:eliminarCuentaRequest" name="eliminarCuentaRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="eliminarCuentaResponse">
+    <wsdl:part element="tns:eliminarCuentaResponse" name="eliminarCuentaResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="registrarClienteRequest">
+    <wsdl:part element="tns:registrarClienteRequest" name="registrarClienteRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="registrarClienteResponse">
+    <wsdl:part element="tns:registrarClienteResponse" name="registrarClienteResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="registrarCuentaResponse">
+    <wsdl:part element="tns:registrarCuentaResponse" name="registrarCuentaResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="registrarMovimientoResponse">
+    <wsdl:part element="tns:registrarMovimientoResponse" name="registrarMovimientoResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="eliminarClienteRequest">
+    <wsdl:part element="tns:eliminarClienteRequest" name="eliminarClienteRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="actualizarClienteResponse">
+    <wsdl:part element="tns:actualizarClienteResponse" name="actualizarClienteResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="eliminarClienteResponse">
+    <wsdl:part element="tns:eliminarClienteResponse" name="eliminarClienteResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="actualizarCuentaRequest">
+    <wsdl:part element="tns:actualizarCuentaRequest" name="actualizarCuentaRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="BancoPort">
+    <wsdl:operation name="actualizarCliente">
+      <wsdl:input message="tns:actualizarClienteRequest" name="actualizarClienteRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:actualizarClienteResponse" name="actualizarClienteResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="actualizarCuenta">
+      <wsdl:input message="tns:actualizarCuentaRequest" name="actualizarCuentaRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:actualizarCuentaResponse" name="actualizarCuentaResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="registrarCuenta">
+      <wsdl:input message="tns:registrarCuentaRequest" name="registrarCuentaRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:registrarCuentaResponse" name="registrarCuentaResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="registrarMovimiento">
+      <wsdl:input message="tns:registrarMovimientoRequest" name="registrarMovimientoRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:registrarMovimientoResponse" name="registrarMovimientoResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="eliminarCuenta">
+      <wsdl:input message="tns:eliminarCuentaRequest" name="eliminarCuentaRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:eliminarCuentaResponse" name="eliminarCuentaResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="registrarCliente">
+      <wsdl:input message="tns:registrarClienteRequest" name="registrarClienteRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:registrarClienteResponse" name="registrarClienteResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="eliminarCliente">
+      <wsdl:input message="tns:eliminarClienteRequest" name="eliminarClienteRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:eliminarClienteResponse" name="eliminarClienteResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BancoPortSoap11" type="tns:BancoPort">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="actualizarCliente">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="actualizarClienteRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="actualizarClienteResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="actualizarCuenta">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="actualizarCuentaRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="actualizarCuentaResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="registrarCuenta">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="registrarCuentaRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="registrarCuentaResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="registrarMovimiento">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="registrarMovimientoRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="registrarMovimientoResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="eliminarCuenta">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="eliminarCuentaRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="eliminarCuentaResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="registrarCliente">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="registrarClienteRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="registrarClienteResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="eliminarCliente">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="eliminarClienteRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="eliminarClienteResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="BancoPortService">
+    <wsdl:port binding="tns:BancoPortSoap11" name="BancoPortSoap11">
+      <soap:address location="http://localhost:8080/ws"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

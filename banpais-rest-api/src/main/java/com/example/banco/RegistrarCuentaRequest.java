@@ -1,10 +1,3 @@
-//
-// Este archivo ha sido generado por Eclipse Implementation of JAXB v3.0.0 
-// Visite https://eclipse-ee4j.github.io/jaxb-ri 
-// Todas las modificaciones realizadas en este archivo se perderán si se vuelve a compilar el esquema de origen. 
-// Generado el: 2025.02.24 a las 10:05:16 AM CST 
-//
-
 
 package com.example.banco;
 
@@ -38,8 +31,8 @@ import jakarta.xml.bind.annotation.XmlType;
 @XmlType(name = "", propOrder = {
     "trama"
 })
-@XmlRootElement(name = "registrarClienteRequest")
-public class RegistrarClienteRequest {
+@XmlRootElement(name = "registrarCuentaRequest")
+public class RegistrarCuentaRequest {
 
     @XmlElement(required = true)
     protected String trama;

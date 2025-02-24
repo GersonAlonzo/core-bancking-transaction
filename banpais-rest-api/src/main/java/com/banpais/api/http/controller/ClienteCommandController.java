@@ -1,13 +1,11 @@
 package com.banpais.api.http.controller;
 
-
 import com.banpais.api.command.config.client.SoapClienteClient;
 import com.banpais.api.command.model.RegistrarClienteCommandModel;
+import com.banpais.api.http.utils.ClienteValidator;
 import com.banpais.soap.client.ActualizarClienteResponse;
 import com.banpais.soap.client.EliminarClienteResponse;
 import com.banpais.soap.client.RegistrarClienteResponse;
-import java.util.ArrayList;
-import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -37,9 +35,13 @@ public class ClienteCommandController {
     @PostMapping("/registrar")
     public ResponseEntity<?> registrarCliente(@RequestBody RegistrarClienteCommandModel request) {
         try {
-            validarCliente(request);
+            // Validación movida al ClienteValidator
+            ClienteValidator.validarCliente(request);
             RegistrarClienteResponse soapResponse = soapClienteClient.registrarCliente(request);
             return procesarRespuestaSoap(soapResponse, "Cliente registrado exitosamente");
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest()
+                    .body(new ErrorResponse("VALIDATION_ERROR", e.getMessage()));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(new ErrorResponse("INTERNAL_ERROR", "Error interno del servidor: " + e.getMessage()));
@@ -49,13 +51,19 @@ public class ClienteCommandController {
     @PutMapping("/actualizar")
     public ResponseEntity<?> actualizarCliente(@RequestBody RegistrarClienteCommandModel request) {
         try {
-            validarCliente(request);
+            // Validación movida al ClienteValidator
+            ClienteValidator.validarCliente(request);
+            
             if (request.getId() == null || request.getId().trim().isEmpty()) {
                 return ResponseEntity.badRequest()
                     .body(new ErrorResponse("VALIDATION_ERROR", "El ID del cliente es obligatorio para actualizar."));
             }
+            
             ActualizarClienteResponse soapResponse = soapClienteClient.actualizarCliente(request);
             return procesarRespuestaSoap(soapResponse, "Cliente actualizado exitosamente");
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest()
+                    .body(new ErrorResponse("VALIDATION_ERROR", e.getMessage()));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(new ErrorResponse("INTERNAL_ERROR", "Error interno del servidor: " + e.getMessage()));
@@ -69,32 +77,12 @@ public class ClienteCommandController {
                 return ResponseEntity.badRequest()
                     .body(new ErrorResponse("VALIDATION_ERROR", "El ID del cliente es obligatorio."));
             }
+            
             EliminarClienteResponse soapResponse = soapClienteClient.eliminarCliente(clienteId);
             return procesarRespuestaSoap(soapResponse, "Cliente eliminado exitosamente");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(new ErrorResponse("INTERNAL_ERROR", "Error interno del servidor: " + e.getMessage()));
-        }
-    }
-
-    private void validarCliente(RegistrarClienteCommandModel request) {
-        List<String> errores = new ArrayList<>();
-        
-        if (request.getNombre() == null || request.getNombre().trim().isEmpty()) {
-            errores.add("El nombre es obligatorio");
-        }
-        if (request.getIdentificacion() == null || request.getIdentificacion().trim().isEmpty()) {
-            errores.add("La identificación es obligatoria");
-        }
-        if (request.getTipoIdentificacion() == null || request.getTipoIdentificacion().trim().isEmpty()) {
-            errores.add("El tipo de identificación es obligatorio");
-        }
-        if (request.getFechaNacimiento() == null) {
-            errores.add("La fecha de nacimiento es obligatoria");
-        }
-
-        if (!errores.isEmpty()) {
-            throw new IllegalArgumentException(String.join(", ", errores));
         }
     }
 
@@ -104,24 +92,29 @@ public class ClienteCommandController {
                     .body(new ErrorResponse("RESPUESTA_NULA", "La respuesta del servicio SOAP fue nula"));
         }
 
+        String codigo = null;
         String mensaje = null;
+
         if (soapResponse instanceof RegistrarClienteResponse) {
-            mensaje = ((RegistrarClienteResponse) soapResponse).getMensaje();
+            RegistrarClienteResponse resp = (RegistrarClienteResponse) soapResponse;
+            codigo = resp.getCodigo();
+            mensaje = resp.getMensaje();
         } else if (soapResponse instanceof ActualizarClienteResponse) {
-            mensaje = ((ActualizarClienteResponse) soapResponse).getMensaje();
+            ActualizarClienteResponse resp = (ActualizarClienteResponse) soapResponse;
+            codigo = resp.getCodigo();
+            mensaje = resp.getMensaje();
         } else if (soapResponse instanceof EliminarClienteResponse) {
-            mensaje = ((EliminarClienteResponse) soapResponse).getMensaje();
+            EliminarClienteResponse resp = (EliminarClienteResponse) soapResponse;
+            codigo = resp.getCodigo();
+            mensaje = resp.getMensaje();
         }
 
-        if (mensaje != null) {
-            String codigoRespuesta = mensaje.substring(0, 3);
-            String mensajeRespuesta = mensaje.substring(3).trim();
-
-            if ("000".equals(codigoRespuesta)) {
-                return ResponseEntity.ok(new ClienteResponse(codigoRespuesta, mensajeExito));
+        if (codigo != null && mensaje != null) {
+            if ("000".equals(codigo)) {
+                return ResponseEntity.ok(new ClienteResponse(codigo, mensajeExito));
             } else {
-                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                        .body(new ErrorResponse(codigoRespuesta, mensajeRespuesta));
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                        .body(new ErrorResponse(codigo, mensaje));
             }
         }
 

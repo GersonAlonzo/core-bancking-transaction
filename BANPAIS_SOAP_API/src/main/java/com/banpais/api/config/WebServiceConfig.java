@@ -17,11 +17,9 @@ import org.springframework.ws.wsdl.wsdl11.DefaultWsdl11Definition;
 import org.springframework.xml.xsd.SimpleXsdSchema;
 import org.springframework.xml.xsd.XsdSchema;
 
-
 @EnableWs
 @Configuration
 public class WebServiceConfig implements WsConfigurer { // Implementa WsConfigurer
-    
 
     @Bean
     public ServletRegistrationBean<MessageDispatcherServlet> messageDispatcherServlet(ApplicationContext applicationContext) {
@@ -48,16 +46,16 @@ public class WebServiceConfig implements WsConfigurer { // Implementa WsConfigur
 
     @Override
     public void addInterceptors(List<EndpointInterceptor> list) {
-     
+
     }
 
     @Override
     public void addArgumentResolvers(List<MethodArgumentResolver> list) {
-        
+
     }
 
     @Override
     public void addReturnValueHandlers(List<MethodReturnValueHandler> list) {
-        
+
     }
 }

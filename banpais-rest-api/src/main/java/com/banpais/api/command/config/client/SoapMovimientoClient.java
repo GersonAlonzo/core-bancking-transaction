@@ -98,6 +98,7 @@ public class SoapMovimientoClient {
             String faultString = fault.getReason() != null ? fault.getReason() : "Unknown SOAP Fault";
             throw new SoapFaultException("Error SOAP: " + faultCode + " - " + faultString, fault);
         } catch (Exception e) {
+            System.out.println("error de soap "+e.toString());
             throw new RuntimeException("Error al invocar el servicio SOAP de registro de movimiento: " + e.getMessage(), e);
         }
     }

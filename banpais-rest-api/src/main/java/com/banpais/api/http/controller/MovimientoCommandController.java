@@ -46,6 +46,7 @@ public class MovimientoCommandController {
 
             // 2. Llamar al SoapClient
             RegistrarMovimientoResponse soapResponse = soapMovimientoClient.registrarMovimiento(request);
+            System.out.println("soap response"+soapResponse);
 
             // 3. Procesar la respuesta SOAP (PARSEANDO LA TRAMA)
             if (soapResponse != null && soapResponse.getTrama() != null) {

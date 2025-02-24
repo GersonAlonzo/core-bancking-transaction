@@ -1,16 +1,18 @@
 package com.banpais.api.command.config.client;
 
-
 import com.banpais.api.config.SoapFaultException;
 import com.banpais.api.infraestructure.entity.TramaParametro;
 import com.banpais.api.infraestructure.repository.TramaParametroRepository;
 import com.banpais.soap.client.BancoPort;
-import static java.lang.StrictMath.log;
+import jakarta.xml.ws.BindingProvider;
+
+
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
+
 import lombok.extern.slf4j.Slf4j;
 import org.apache.cxf.binding.soap.SoapFault;
 
@@ -19,13 +21,19 @@ public abstract class AbstractSoapClient {
     protected final BancoPort bancoPort;
     protected final TramaParametroRepository tramaParametroRepository;
     protected final String nombreTrama;
+    protected final String username;
+    protected final String password;
 
-    protected AbstractSoapClient(BancoPort bancoPort, 
-                               TramaParametroRepository tramaParametroRepository,
-                               String nombreTrama) {
+    protected AbstractSoapClient(BancoPort bancoPort,
+                                 TramaParametroRepository tramaParametroRepository,
+                                 String nombreTrama,
+                                 String username,
+                                 String password) {
         this.bancoPort = bancoPort;
         this.tramaParametroRepository = tramaParametroRepository;
         this.nombreTrama = nombreTrama;
+        this.username = username;
+        this.password = password;
     }
 
     protected String construirTrama(Map<String, String> valores) {
@@ -81,6 +89,11 @@ public abstract class AbstractSoapClient {
 
     protected <T> T ejecutarOperacionSoap(Supplier<T> operacion, String descripcionOperacion) {
         try {
+            // Configurar las credenciales de autenticación
+            BindingProvider bindingProvider = (BindingProvider) bancoPort;
+            bindingProvider.getRequestContext().put(BindingProvider.USERNAME_PROPERTY, username);
+            bindingProvider.getRequestContext().put(BindingProvider.PASSWORD_PROPERTY, password);
+            
             return operacion.get();
         } catch (SoapFault fault) {
             String faultCode = fault.getFaultCode() != null ? 

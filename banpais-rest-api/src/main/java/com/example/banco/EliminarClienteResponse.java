@@ -1,10 +1,3 @@
-//
-// Este archivo ha sido generado por Eclipse Implementation of JAXB v3.0.0 
-// Visite https://eclipse-ee4j.github.io/jaxb-ri 
-// Todas las modificaciones realizadas en este archivo se perderán si se vuelve a compilar el esquema de origen. 
-// Generado el: 2025.02.24 a las 10:05:16 AM CST 
-//
-
 
 package com.example.banco;
 
@@ -25,7 +18,8 @@ import jakarta.xml.bind.annotation.XmlType;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element name="trama" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
+ *         &lt;element name="codigo" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
+ *         &lt;element name="mensaje" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
@@ -36,36 +30,63 @@ import jakarta.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "trama"
+    "codigo",
+    "mensaje"
 })
-@XmlRootElement(name = "registrarClienteRequest")
-public class RegistrarClienteRequest {
+@XmlRootElement(name = "eliminarClienteResponse")
+public class EliminarClienteResponse {
 
     @XmlElement(required = true)
-    protected String trama;
+    protected String codigo;
+    @XmlElement(required = true)
+    protected String mensaje;
 
     /**
-     * Obtiene el valor de la propiedad trama.
+     * Obtiene el valor de la propiedad codigo.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getTrama() {
-        return trama;
+    public String getCodigo() {
+        return codigo;
     }
 
     /**
-     * Define el valor de la propiedad trama.
+     * Define el valor de la propiedad codigo.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setTrama(String value) {
-        this.trama = value;
+    public void setCodigo(String value) {
+        this.codigo = value;
+    }
+
+    /**
+     * Obtiene el valor de la propiedad mensaje.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getMensaje() {
+        return mensaje;
+    }
+
+    /**
+     * Define el valor de la propiedad mensaje.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setMensaje(String value) {
+        this.mensaje = value;
     }
 
 }

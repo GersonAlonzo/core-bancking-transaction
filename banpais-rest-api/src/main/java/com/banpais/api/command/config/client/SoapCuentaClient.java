@@ -16,6 +16,7 @@ import java.util.HashMap;
 import java.util.Map;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -23,8 +24,10 @@ import org.springframework.stereotype.Component;
 public class SoapCuentaClient extends AbstractSoapClient implements ISoapCuentaOperations {
     
     @Autowired
-    public SoapCuentaClient(BancoPort bancoPort, TramaParametroRepository tramaParametroRepository) {
-        super(bancoPort, tramaParametroRepository, "CUENTA_IN");
+    public SoapCuentaClient(BancoPort bancoPort, TramaParametroRepository tramaParametroRepository,
+            @Value("${soap.username}") String username,
+            @Value("${soap.password}") String password) {
+        super(bancoPort, tramaParametroRepository, "CUENTA_IN",username, password);
     }
 
     @Override

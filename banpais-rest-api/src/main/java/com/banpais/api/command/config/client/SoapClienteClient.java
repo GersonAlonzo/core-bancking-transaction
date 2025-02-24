@@ -1,6 +1,5 @@
 package com.banpais.api.command.config.client;
 
-
 import com.banpais.api.command.config.interfaces.ISoapClienteOperations;
 import com.banpais.api.command.model.RegistrarClienteCommandModel;
 import com.banpais.api.infraestructure.repository.TramaParametroRepository;
@@ -18,15 +17,18 @@ import java.util.Map;
 import java.util.UUID;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
 @Slf4j
 public class SoapClienteClient extends AbstractSoapClient implements ISoapClienteOperations {
-    
+
     @Autowired
-    public SoapClienteClient(BancoPort bancoPort, TramaParametroRepository tramaParametroRepository) {
-        super(bancoPort, tramaParametroRepository, "CLIENTE_IN");
+    public SoapClienteClient(BancoPort bancoPort, TramaParametroRepository tramaParametroRepository,
+            @Value("${soap.username}") String username,
+            @Value("${soap.password}") String password) {
+        super(bancoPort, tramaParametroRepository, "CLIENTE_IN",username, password);
     }
 
     @Override
@@ -36,18 +38,18 @@ public class SoapClienteClient extends AbstractSoapClient implements ISoapClient
         valores.put("NOMBRE", request.getNombre());
         valores.put("IDENTIFICACION", request.getIdentificacion());
         valores.put("TIPO_IDENTIFICACION", request.getTipoIdentificacion());
-        valores.put("FECHA_NACIMIENTO", 
-            request.getFechaNacimiento().format(DateTimeFormatter.ofPattern("yyyyMMdd")));
+        valores.put("FECHA_NACIMIENTO",
+                request.getFechaNacimiento().format(DateTimeFormatter.ofPattern("yyyyMMdd")));
 
         String trama = construirTrama(valores);
-        
+
         return ejecutarOperacionSoap(
-            () -> {
-                RegistrarClienteRequest soapRequest = new RegistrarClienteRequest();
-                soapRequest.setTrama(trama);
-                return bancoPort.registrarCliente(soapRequest);
-            },
-            "registro de cliente"
+                () -> {
+                    RegistrarClienteRequest soapRequest = new RegistrarClienteRequest();
+                    soapRequest.setTrama(trama);
+                    return bancoPort.registrarCliente(soapRequest);
+                },
+                "registro de cliente"
         );
     }
 
@@ -58,18 +60,18 @@ public class SoapClienteClient extends AbstractSoapClient implements ISoapClient
         valores.put("NOMBRE", request.getNombre());
         valores.put("IDENTIFICACION", request.getIdentificacion());
         valores.put("TIPO_IDENTIFICACION", request.getTipoIdentificacion());
-        valores.put("FECHA_NACIMIENTO", 
-            request.getFechaNacimiento().format(DateTimeFormatter.ofPattern("yyyyMMdd")));
+        valores.put("FECHA_NACIMIENTO",
+                request.getFechaNacimiento().format(DateTimeFormatter.ofPattern("yyyyMMdd")));
 
         String trama = construirTrama(valores);
-        
+
         return ejecutarOperacionSoap(
-            () -> {
-                ActualizarClienteRequest soapRequest = new ActualizarClienteRequest();
-                soapRequest.setTrama(trama);
-                return bancoPort.actualizarCliente(soapRequest);
-            },
-            "actualización de cliente"
+                () -> {
+                    ActualizarClienteRequest soapRequest = new ActualizarClienteRequest();
+                    soapRequest.setTrama(trama);
+                    return bancoPort.actualizarCliente(soapRequest);
+                },
+                "actualización de cliente"
         );
     }
 
@@ -79,14 +81,14 @@ public class SoapClienteClient extends AbstractSoapClient implements ISoapClient
         valores.put("ID", clienteId);
 
         String trama = construirTrama(valores);
-        
+
         return ejecutarOperacionSoap(
-            () -> {
-                EliminarClienteRequest soapRequest = new EliminarClienteRequest();
-                soapRequest.setTrama(trama);
-                return bancoPort.eliminarCliente(soapRequest);
-            },
-            "eliminación de cliente"
+                () -> {
+                    EliminarClienteRequest soapRequest = new EliminarClienteRequest();
+                    soapRequest.setTrama(trama);
+                    return bancoPort.eliminarCliente(soapRequest);
+                },
+                "eliminación de cliente"
         );
     }
 }

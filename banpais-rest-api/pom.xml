@@ -170,7 +170,7 @@
                             </defaultOptions>
                             <wsdlOptions>
                                 <wsdlOption>
-                                    <wsdl>http://localhost:8080/ws/banco.wsdl</wsdl>
+                                    <wsdl>${project.basedir}/src/main/resources/banco.wsdl</wsdl>
                                     <extraargs>
                                         <extraarg>-p</extraarg>
                                         <extraarg>com.banpais.soap.client</extraarg>
