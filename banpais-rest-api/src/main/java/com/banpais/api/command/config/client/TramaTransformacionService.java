@@ -19,7 +19,7 @@ public class TramaTransformacionService {
     }
 
     public String generarTrama(Map<String, Object> campos, String nombreTrama) {
-        // Obtener los parámetros de la trama
+        // Obtener los parámetrosparámetros de la trama
         List<TramaParametro> parametros = tramaParametroRepository.findByNombreTrama(nombreTrama);
         
         // Crear un mapa de parámetros para facilitar la búsqueda
