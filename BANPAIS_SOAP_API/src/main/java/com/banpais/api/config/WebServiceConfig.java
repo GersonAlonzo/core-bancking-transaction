@@ -19,7 +19,7 @@ import org.springframework.xml.xsd.XsdSchema;
 
 @EnableWs
 @Configuration
-public class WebServiceConfig implements WsConfigurer { // Implementa WsConfigurer
+public class WebServiceConfig implements WsConfigurer { 
 
     @Bean
     public ServletRegistrationBean<MessageDispatcherServlet> messageDispatcherServlet(ApplicationContext applicationContext) {
@@ -29,7 +29,7 @@ public class WebServiceConfig implements WsConfigurer { // Implementa WsConfigur
         return new ServletRegistrationBean<>(servlet, "/ws/*");
     }
 
-    @Bean(name = "banco") // El nombre del bean es importante. Será parte de la URL del WSDL.
+    @Bean(name = "banco") 
     public DefaultWsdl11Definition defaultWsdl11Definition(XsdSchema bancoSchema) {
         DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
         wsdl11Definition.setPortTypeName("BancoPort");
@@ -41,7 +41,7 @@ public class WebServiceConfig implements WsConfigurer { // Implementa WsConfigur
 
     @Bean
     public XsdSchema bancoSchema() {
-        return new SimpleXsdSchema(new ClassPathResource("xsd/banco.xsd")); // Ruta a tu archivo XSD
+        return new SimpleXsdSchema(new ClassPathResource("xsd/banco.xsd")); 
     }
 
     @Override

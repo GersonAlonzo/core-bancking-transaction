@@ -1,4 +1,3 @@
-// TramaParametroRepository.java
 package com.banpais.api.infraestructure.repository;
 
 import com.banpais.api.infraestructure.entity.TramaParametro;

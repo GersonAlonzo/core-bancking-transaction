@@ -17,8 +17,8 @@ public class Cliente {
     @Column(name = "ID", length = 36)
     private String id;
 
-    @NotBlank // Validación: No puede estar en blanco
-    @Size(max = 255) // Validación: Longitud máxima
+    @NotBlank 
+    @Size(max = 255) 
     @Column(name = "NOMBRE", nullable = false)
     private String nombre;
 
@@ -32,7 +32,7 @@ public class Cliente {
     @Column(name = "TIPO_IDENTIFICACION", nullable = false)
     private String tipoIdentificacion;
 
-    @NotNull // Validación: No puede ser nulo
+    @NotNull 
     @Column(name = "FECHA_NACIMIENTO", nullable = false)
     private LocalDate fechaNacimiento;
 }

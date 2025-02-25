@@ -9,7 +9,7 @@ import lombok.Data;
 public class CuentaQueyModel {
 
     private String numeroCuenta;
-    private String clienteId; // ID del cliente como String
+    private String clienteId; 
     private LocalDateTime fechaApertura;
     private LocalTime horaApertura;
     private String estadoCuenta;

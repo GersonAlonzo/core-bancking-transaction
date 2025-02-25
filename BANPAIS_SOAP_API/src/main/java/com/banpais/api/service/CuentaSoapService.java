@@ -35,9 +35,9 @@ public class CuentaSoapService {
 
     //Considera usar un enum para el estado
     public enum EstadoCuenta {
-        ACT, //Activa
-        INA, //Inactiva
-        BLO  //Bloqueada
+        ACT, 
+        INA, 
+        BLO  
     }
 
 
@@ -133,8 +133,8 @@ public class CuentaSoapService {
         cuentaRepository.delete(cuenta);
 
         EliminarCuentaResponse response = new EliminarCuentaResponse();
-        response.setCodigo("000"); // Considera hacerlo dinámico.
-        response.setMensaje("Cuenta eliminada exitosamente"); // Considera hacerlo dinámico.
+        response.setCodigo("000"); // todo: hacerlo dinámico.
+        response.setMensaje("Cuenta eliminada exitosamente"); // tido: hacerlo dinámico.
         return response;
     }
 }

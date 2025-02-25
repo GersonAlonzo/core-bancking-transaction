@@ -25,7 +25,7 @@ public class RegistrarMovimientoCommandModel {
     
     private String cuentaOrigen;
     private String cuentaDestino;
-    private LocalDateTime fechaMovimiento; // Usamos LocalDateTime
+    private LocalDateTime fechaMovimiento; 
     private String tipoMovimiento;
     private BigDecimal monto;
     

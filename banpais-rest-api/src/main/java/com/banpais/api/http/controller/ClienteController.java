@@ -44,44 +44,27 @@ public class ClienteController {
 //    CRUD METHODS
     @PostMapping("/registrar")
     public ResponseEntity<?> registrarCliente(@RequestBody RegistrarClienteCommandModel request) {
-        // Validación movida al ClienteValidator
         ClienteValidator.validarCliente(request);
-
-        // Llamar al SoapClient
         RegistrarClienteResponse soapResponse = soapClienteClient.registrarCliente(request);
-
-        // Procesar la respuesta SOAP de manera genérica
         return SoapResponseProcessor.procesarRespuestaSoap(soapResponse, "Cliente registrado exitosamente");
     }
 
     @PutMapping("/actualizar")
     public ResponseEntity<?> actualizarCliente(@RequestBody RegistrarClienteCommandModel request) {
-        // Validación movida al ClienteValidator
         ClienteValidator.validarCliente(request);
-
-        // Validación específica de ID para actualización
         if (request.getId() == null || request.getId().trim().isEmpty()) {
             throw new IllegalArgumentException("El ID del cliente es obligatorio para actualizar.");
         }
-
-        // Llamar al SoapClient
         ActualizarClienteResponse soapResponse = soapClienteClient.actualizarCliente(request);
-
-        // Procesar la respuesta SOAP de manera genérica
         return SoapResponseProcessor.procesarRespuestaSoap(soapResponse, "Cliente actualizado exitosamente");
     }
 
     @DeleteMapping("/{clienteId}")
     public ResponseEntity<?> eliminarCliente(@PathVariable String clienteId) {
-        // Validación de ID de cliente
         if (clienteId == null || clienteId.trim().isEmpty()) {
             throw new IllegalArgumentException("El ID del cliente es obligatorio.");
         }
-
-        // Llamar al SoapClient
         EliminarClienteResponse soapResponse = soapClienteClient.eliminarCliente(clienteId);
-
-        // Procesar la respuesta SOAP de manera genérica
         return SoapResponseProcessor.procesarRespuestaSoap(soapResponse, "Cliente eliminado exitosamente");
     }
 }

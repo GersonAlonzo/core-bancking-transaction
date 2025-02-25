@@ -3,6 +3,9 @@ package com.banpais.api.http.utils;
 import com.banpais.api.command.model.RegistrarClienteCommandModel;
 import java.util.ArrayList;
 import java.util.List;
+import lombok.Data;
+
+@Data
 
 public class ClienteValidator {
 
@@ -34,7 +37,5 @@ public class ClienteValidator {
         }
     }
 
-    private ClienteValidator() {
-        // Constructor privado para evitar instanciación
-    }
+    
 }

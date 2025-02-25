@@ -19,10 +19,10 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityConfig {
 
-    @Value("${spring.security.user.name:admin}") // Valor predeterminado "admin"
+    @Value("${spring.security.user.name:admin}") 
     private String username;
     
-    @Value("${spring.security.user.password:admin}") // Valor predeterminado "admin"
+    @Value("${spring.security.user.password:admin}") 
     private String password;
     
     @Bean
@@ -43,8 +43,8 @@ public class SecurityConfig {
         System.out.println("Configurando seguridad con usuario: " + username);
         
         UserDetails user = User.builder()
-                .username(username) // Usa el valor inyectado
-                .password(passwordEncoder().encode(password)) // Usa el valor inyectado
+                .username(username) 
+                .password(passwordEncoder().encode(password))
                 .roles("USER")
                 .build();
                 

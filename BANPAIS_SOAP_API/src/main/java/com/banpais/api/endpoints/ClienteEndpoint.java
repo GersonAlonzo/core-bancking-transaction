@@ -21,17 +21,14 @@ public class ClienteEndpoint {
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "registrarClienteRequest")
     @ResponsePayload
     public RegistrarClienteResponse registrarCliente(@RequestPayload RegistrarClienteRequest request) {
-        //  Llama al servicio, *pasando directamente el objeto request*, no la trama como String.
-        //  El servicio ahora devuelve un objeto RegistrarClienteResponse, no un ClienteResponse.
         System.out.println("trama completa:"+request.getTrama().toString());
         RegistrarClienteResponse response = clienteSoapService.registrarCliente(request.getTrama());
-        return response; // Devuelve directamente el objeto de respuesta.
+        return response; 
     }
 
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "actualizarClienteRequest")
     @ResponsePayload
     public ActualizarClienteResponse actualizarCliente(@RequestPayload ActualizarClienteRequest request) {
-        // Similar a registrarCliente:  Llamada directa al servicio, pasando el request.
         ActualizarClienteResponse response = clienteSoapService.actualizarCliente(request.getTrama());
         return response;
     }
@@ -39,7 +36,6 @@ public class ClienteEndpoint {
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "eliminarClienteRequest")
     @ResponsePayload
     public EliminarClienteResponse eliminarCliente(@RequestPayload EliminarClienteRequest request) {
-        // Similar a registrarCliente:  Llamada directa al servicio, pasando el request.
         EliminarClienteResponse response = clienteSoapService.eliminarCliente(request.getTrama());
         return response;
     }

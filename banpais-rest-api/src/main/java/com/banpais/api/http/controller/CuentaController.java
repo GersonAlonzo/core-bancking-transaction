@@ -44,25 +44,15 @@ public class CuentaController {
     //command methods
     @PostMapping("/registrar")
     public ResponseEntity<?> registrarCuenta(@RequestBody RegistrarCuentaCommandModel request) {
-        // 1. Validaciones
         CuentaValidator.validarRegistroCuenta(request);
-
-        // 2. Llamar al SoapClient
         RegistrarCuentaResponse soapResponse = soapCuentaClient.registrarCuenta(request);
-
-        // 3. Procesar la respuesta SOAP de manera genérica
         return SoapResponseProcessor.procesarRespuestaSoap(soapResponse, "Cuenta registrada exitosamente");
     }
 
     @DeleteMapping("/{numeroCuenta}")
     public ResponseEntity<?> eliminarCuenta(@PathVariable String numeroCuenta) {
-        // 1. Validación
         CuentaValidator.validarEliminacionCuenta(numeroCuenta);
-
-        // 2. Llamar al SoapClient
         EliminarCuentaResponse soapResponse = soapCuentaClient.eliminarCuenta(numeroCuenta);
-
-        // 3. Procesar la respuesta SOAP de manera genérica
         return SoapResponseProcessor.procesarRespuestaSoap(soapResponse, "Cuenta eliminada exitosamente");
     }
 }

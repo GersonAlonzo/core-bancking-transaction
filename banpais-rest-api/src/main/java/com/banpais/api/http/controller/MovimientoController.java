@@ -39,13 +39,8 @@ public class MovimientoController {
     
     @PostMapping("/registrar")
     public ResponseEntity<?> registrarMovimiento(@RequestBody RegistrarMovimientoCommandModel request) {
-        // 1. Validaciones
         MovimientoValidator.validarRegistroMovimiento(request);
-
-        // 2. Llamar al SoapClient
         RegistrarMovimientoResponse soapResponse = soapMovimientoClient.registrarMovimiento(request);
-
-        // 3. Procesar la respuesta SOAP de manera genérica
         return procesarRespuestaSoap(soapResponse);
     }
 
@@ -55,11 +50,9 @@ public class MovimientoController {
                     .body(new ErrorResponse("RESPUESTA_NULA", "La respuesta del servicio SOAP fue nula o incompleta."));
         }
 
-        // Parsear la trama de respuesta
         MovimientoValidator.ParsedResponse parsedResponse = 
             MovimientoValidator.parsearTrama(soapResponse.getTrama());
 
-        // Verificar el código de respuesta
         if ("000".equals(parsedResponse.getCodigo())) {
             return ResponseEntity.ok(new SuccessResponse(
                 parsedResponse.getCodigo(), 

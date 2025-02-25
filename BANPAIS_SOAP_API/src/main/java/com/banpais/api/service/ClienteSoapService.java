@@ -87,8 +87,8 @@ public class ClienteSoapService {
         clienteRepository.save(cliente);
 
         ActualizarClienteResponse response = new ActualizarClienteResponse();
-        response.setCodigo("000"); //Considera hacerlo dinamico
-        response.setMensaje("Cliente actualizado exitosamente"); //Considera hacerlo dinamico
+        response.setCodigo("000"); //todo: hacerlo dinamico
+        response.setMensaje("Cliente actualizado exitosamente"); //todo: hacerlo dinamico
         return response;
     }
 
@@ -103,8 +103,8 @@ public class ClienteSoapService {
         clienteRepository.delete(cliente);
 
         EliminarClienteResponse response = new EliminarClienteResponse();
-        response.setCodigo("000");  //Considera hacerlo dinamico
-        response.setMensaje("Cliente eliminado exitosamente"); //Considera hacerlo dinamico
+        response.setCodigo("000");  //todo: hacerlo dinamico
+        response.setMensaje("Cliente eliminado exitosamente"); //todo: hacerlo dinamico
         return response;
     }
 }

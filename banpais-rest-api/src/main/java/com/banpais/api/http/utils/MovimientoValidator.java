@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 
 public class MovimientoValidator {
 
-    // Constantes para los códigos de tipo de movimiento
+
     private static final String CODIGO_DEPOSITO = "DEPOSITO";
     private static final String CODIGO_RETIRO = "RETIRO";
     private static final String CODIGO_TRANSFER = "TRANSFER";
@@ -56,7 +56,6 @@ public class MovimientoValidator {
         }
     }
 
-    // Método auxiliar para parsear la trama de respuesta
     public static ParsedResponse parsearTrama(String trama) {
         if (trama == null || trama.trim().isEmpty()) {
             throw new IllegalArgumentException("La trama de respuesta no puede ser nula o vacía.");

@@ -2,7 +2,9 @@ package com.banpais.api.http.utils;
 
 import com.banpais.api.command.model.RegistrarCuentaCommandModel;
 import java.math.BigDecimal;
+import lombok.Data;
 
+@Data
 public class CuentaValidator {
 
     public static void validarRegistroCuenta(RegistrarCuentaCommandModel request) {
@@ -34,6 +36,6 @@ public class CuentaValidator {
     }
 
     // Constructor privado para evitar instanciación
-    private CuentaValidator() {
-    }
+//    private CuentaValidator() {
+//    }
 }

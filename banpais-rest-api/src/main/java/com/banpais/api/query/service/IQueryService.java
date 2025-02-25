@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package com.banpais.api.query.service;
 
 import com.banpais.api.query.model.ClienteQueyModel;
@@ -11,10 +8,6 @@ import com.banpais.api.query.model.TipoMovimientoQueryModel;
 import java.util.List;
 import java.util.Optional;
 
-/**
- *
- * @author gcalvaradoa
- */
 public interface IQueryService {
     
     

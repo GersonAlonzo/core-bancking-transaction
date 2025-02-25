@@ -23,7 +23,6 @@ public class TramaService {
     private static final Logger log = LoggerFactory.getLogger(TramaService.class);
     private final TramaParametroRepository tramaParametroRepository;
 
-    // Constantes para formatos de fecha y hora
     private static final String DATE_FORMAT = "yyyyMMdd";
     private static final String TIME_FORMAT = "HHmmss";
     private static final String DATETIME_FORMAT = "yyyyMMddHHmmss";

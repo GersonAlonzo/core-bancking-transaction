@@ -1,4 +1,3 @@
-// ClienteDTO.java
 package com.banpais.api.query.model;
 
 

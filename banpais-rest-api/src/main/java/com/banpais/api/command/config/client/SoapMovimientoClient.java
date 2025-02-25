@@ -40,10 +40,8 @@ public class SoapMovimientoClient extends AbstractSoapClient {
         valores.put("MONTO", request.getMonto().toString());
         valores.put("FECHA_MOVIMIENTO", LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss")));
 
-        // Construir la trama usando el método de la clase abstracta
         String trama = construirTrama(valores);
 
-        // Ejecutar la operación SOAP usando el método de la clase abstracta
         return ejecutarOperacionSoap(
             () -> {
                 RegistrarMovimientoRequest soapRequest = new RegistrarMovimientoRequest();

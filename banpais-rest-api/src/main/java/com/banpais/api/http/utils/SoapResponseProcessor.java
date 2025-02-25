@@ -15,7 +15,6 @@ public class SoapResponseProcessor {
         String mensaje = null;
 
         try {
-            // Usa reflection para obtener los métodos getCodigo() y getMensaje()
             codigo = (String) soapResponse.getClass().getMethod("getCodigo").invoke(soapResponse);
             mensaje = (String) soapResponse.getClass().getMethod("getMensaje").invoke(soapResponse);
         } catch (Exception e) {
