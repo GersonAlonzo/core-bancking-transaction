@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://www.example.com/banco"
+           xmlns:tns="http://www.example.com/banco"
+           elementFormDefault="qualified">
+
+    <!--  Solicitud para registrar un movimiento -->
+    <xs:element name="registrarMovimientoRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="trama" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <!-- Respuesta para registrar un movimiento -->
+    <xs:element name="registrarMovimientoResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="trama" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <!--  Solicitud para registrar un cliente -->
+    <xs:element name="registrarClienteRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="trama" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+	<!--  Respuesta para registrar un Cliente -->
+    <xs:element name="registrarClienteResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="codigo" type="xs:string"/>
+				<xs:element name="mensaje" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+	
+    <!--  Solicitud para actualizar un cliente -->
+	<xs:element name="actualizarClienteRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="trama" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+	
+	    <!--  Respuesta para actualizar un Cliente -->
+    <xs:element name="actualizarClienteResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="codigo" type="xs:string"/>
+				<xs:element name="mensaje" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <!--  Solicitud para eliminar un cliente -->
+	<xs:element name="eliminarClienteRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="trama" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+	
+	    <!--  Respuesta para eliminar un Cliente -->
+    <xs:element name="eliminarClienteResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="codigo" type="xs:string"/>
+				<xs:element name="mensaje" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+	
+	
+	 <!--  Solicitud para registrar una cuenta -->
+    <xs:element name="registrarCuentaRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="trama" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+	<!--  Respuesta para registrar una cuenta -->
+    <xs:element name="registrarCuentaResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="codigo" type="xs:string"/>
+				<xs:element name="mensaje" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+	
+    <!--  Solicitud para actualizar una cuenta -->
+	<xs:element name="actualizarCuentaRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="trama" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+	
+	    <!--  Respuesta para actualizar una cuenta -->
+    <xs:element name="actualizarCuentaResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="codigo" type="xs:string"/>
+				<xs:element name="mensaje" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <!--  Solicitud para eliminar una cuenta -->
+	<xs:element name="eliminarCuentaRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="trama" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+	
+	    <!--  Respuesta para eliminar una cuenta -->
+    <xs:element name="eliminarCuentaResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="codigo" type="xs:string"/>
+				<xs:element name="mensaje" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>
