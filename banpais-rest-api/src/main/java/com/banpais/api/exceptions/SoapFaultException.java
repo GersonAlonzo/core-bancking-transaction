@@ -1,4 +1,4 @@
-package com.banpais.api.config;
+package com.banpais.api.exceptions;
 
 public class SoapFaultException extends RuntimeException {
 

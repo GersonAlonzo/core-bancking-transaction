@@ -13,9 +13,9 @@ public class SwaggerConfig {
     public OpenAPI customOpenAPI() {
         return new OpenAPI()
                 .info(new Info()
-                        .title("Banpais Transaction Management")
+                        .title("BANPAIS TRANSACTIONAL")
                         .version("1.0")
-                        .description("Documentación de la API de manentenimiento transacciones."));
+                        .description("Documentación de la API transacional Banpais Challenge"));
     }
 
     @Bean
@@ -23,6 +23,7 @@ public class SwaggerConfig {
         return GroupedOpenApi.builder()
                 .group("public")
                 .pathsToMatch("/api/**")
+                .packagesToExclude("com.banpais.api.exceptions")
                 .build();
     }
 }

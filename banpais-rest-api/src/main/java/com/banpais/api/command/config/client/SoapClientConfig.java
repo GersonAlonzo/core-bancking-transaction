@@ -17,7 +17,9 @@ public class SoapClientConfig {
     @Bean
     public BancoPort bancoPort() {
         try {
-            BancoPortService service = new BancoPortService();
+             URL wsdlUrl = getClass().getClassLoader().getResource("banco.wsdl");
+             
+            BancoPortService service = new BancoPortService(wsdlUrl);
             return service.getBancoPortSoap11();
         } catch (Exception e) {
             throw new RuntimeException("Error al crear el cliente SOAP", e);

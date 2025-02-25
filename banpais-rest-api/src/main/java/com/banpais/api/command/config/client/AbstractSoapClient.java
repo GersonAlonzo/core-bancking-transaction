@@ -1,6 +1,6 @@
 package com.banpais.api.command.config.client;
 
-import com.banpais.api.config.SoapFaultException;
+import com.banpais.api.exceptions.SoapFaultException;
 import com.banpais.api.infraestructure.entity.TramaParametro;
 import com.banpais.api.infraestructure.repository.TramaParametroRepository;
 import com.banpais.soap.client.BancoPort;
