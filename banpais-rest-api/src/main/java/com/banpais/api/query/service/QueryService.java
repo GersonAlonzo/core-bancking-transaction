@@ -67,5 +67,15 @@ public class QueryService implements IQueryService {
         return tipoMovimientoContract.getAll();
     }
 
+    @Override
+    public List<CuentaQueyModel> getAllCuentas() {
+        return cuentaQueryContract.getAllCuentas();
+    }
+
+    @Override
+    public List<MovimientoQueyModel> getAllMovimientos() {
+       return movimientoQueryContract.getAllMovimientos();
+    }
+
 
 }

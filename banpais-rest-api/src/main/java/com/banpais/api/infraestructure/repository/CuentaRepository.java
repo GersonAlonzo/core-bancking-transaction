@@ -10,6 +10,6 @@ import java.util.List;
 public interface CuentaRepository extends JpaRepository<Cuenta, String> {
     Optional<Cuenta> findByNumeroCuenta(String numeroCuenta);
 
-    @Query("SELECT c FROM Cuenta c WHERE c.cliente = :clienteId")
+    @Query("SELECT c FROM Cuenta c WHERE c.clienteId = :clienteId")
     List<Cuenta> findCuentasByClienteId(@Param("clienteId") String clienteId);
 }

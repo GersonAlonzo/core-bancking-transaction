@@ -21,9 +21,11 @@ public interface IQueryService {
     
     public Optional<CuentaQueyModel> getCuentaByNumeroCuenta(String numeroCuenta);
     public List<CuentaQueyModel> getCuentasByClienteId(String clienteId);
+    public List<CuentaQueyModel> getAllCuentas();
     
     
      public Optional<TipoMovimientoQueryModel> getTipoMovimientoByCodigo(String codigo);
      public List<TipoMovimientoQueryModel> getAllTipoMovimientos();
+     public List<MovimientoQueyModel> getAllMovimientos();
     
 }

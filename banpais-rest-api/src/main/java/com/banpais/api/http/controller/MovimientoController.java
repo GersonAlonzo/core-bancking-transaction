@@ -33,6 +33,12 @@ public class MovimientoController {
         List<MovimientoQueyModel> movimientos = queryService.getMovimientosByCuenta(numeroCuenta);
         return movimientos.isEmpty() ? ResponseEntity.noContent().build() : ResponseEntity.ok(movimientos);
     }
+    @GetMapping
+    public ResponseEntity<List<MovimientoQueyModel>> getAllMovimientos() {
+        
+        List<MovimientoQueyModel> movimientos = queryService.getAllMovimientos();
+        return  ResponseEntity.ok(movimientos);
+    }
     
     
 //    command methods

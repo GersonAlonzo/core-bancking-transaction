@@ -33,6 +33,13 @@ public class CuentaController {
                 .map(cuenta -> ResponseEntity.ok(cuenta))
                 .orElse(ResponseEntity.notFound().build());
     }
+    
+    @GetMapping
+    public ResponseEntity<List<CuentaQueyModel>> getAllCuentas() {
+        
+        List<CuentaQueyModel> cuentas = queryService.getAllCuentas();
+        return  ResponseEntity.ok(cuentas);
+    }
 
     @GetMapping("/cliente/{clienteId}")
     public ResponseEntity<List<CuentaQueyModel>> getCuentasByClienteId(@PathVariable String clienteId) {

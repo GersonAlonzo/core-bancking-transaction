@@ -25,7 +25,7 @@ public class Cuenta {
     @Size(max = 36)
 //    @ManyToOne(fetch = FetchType.LAZY)LAZY
     @Column(name = "FK_ID_CLIENTE", nullable = false)
-    private String cliente;
+    private String clienteId;
 
 	@Column(name = "FECHA_APERTURA", nullable = false)
     private LocalDateTime fechaApertura;
