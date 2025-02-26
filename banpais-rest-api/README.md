@@ -3,8 +3,7 @@
 [![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.4.3-green)](https://spring.io/projects/spring-boot)
 [![Java](https://img.shields.io/badge/Java-17-blue)](https://www.java.com/)
 [![Maven](https://img.shields.io/badge/Maven-3-orange)](https://maven.apache.org/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-red.svg)](https://opensource.org/licenses/MIT) <!-- O la licencia que aplique -->
-<!-- Añade más badges según sea necesario (ej. build status, code coverage) -->
+[![License: MIT](https://img.shields.io/badge/License-MIT-red.svg)](https://opensource.org/licenses/MIT) 
 
 ## 📖 Descripción
 

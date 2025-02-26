@@ -1,4 +1,4 @@
-# 📦 Proyecto Spring Boot: API SOAP para Transacciones Bancarias (BANPAIS)
+# 📦 Proyecto Spring Boot: API SOAP para Transacciones Bancarias
 
 [![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.4.3-green)](https://spring.io/projects/spring-boot)
 [![Java](https://img.shields.io/badge/Java-17-blue)](https://www.java.com/)
@@ -89,7 +89,9 @@ La definición completa de los endpoints, incluyendo los tipos de datos y operac
 
 ### 📄 Formato de Trama
 
-Los endpoints SOAP de este servicio utilizan un formato de trama de texto plano para los datos de entrada y salida, parametrizados a nivel de base de datos.  A continuación, se detalla la estructura de las tramas para cada operación.  *Todos los campos son de longitud fija.*
+Los endpoints SOAP de este servicio utilizan un formato de trama de texto plano para los datos de entrada y salida, parametrizados a nivel de base de datos.  A continuación, se detalla la estructura de las tramas para cada operación.  
+![image](https://github.com/user-attachments/assets/4e2b30f3-c81b-4c65-9a5b-4dfd10c81ad0)
+
 
 **1.  ejemplo:**
 
