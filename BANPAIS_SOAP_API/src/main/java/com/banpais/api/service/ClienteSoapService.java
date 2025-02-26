@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Service
@@ -22,13 +23,13 @@ public class ClienteSoapService {
     private final TramaService tramaService;
 
     private static final String CLIENTE_ENTRADA = "CLIENTE_IN";
-
+    @Value("${banco.cuenta.oficial.cliente}")
+    private String bancoCuentaOficial;
     private static final String CAMPO_ID = "ID";
     private static final String CAMPO_NOMBRE = "NOMBRE";
     private static final String CAMPO_IDENTIFICACION = "IDENTIFICACION";
     private static final String CAMPO_TIPO_IDENTIFICACION = "TIPO_IDENTIFICACION";
     private static final String CAMPO_FECHA_NACIMIENTO = "FECHA_NACIMIENTO";
-
 
     public ClienteSoapService(ClienteRepository clienteRepository, TramaService tramaService) {
         this.clienteRepository = clienteRepository;
@@ -59,7 +60,7 @@ public class ClienteSoapService {
         clienteRepository.save(cliente);
 
         RegistrarClienteResponse response = new RegistrarClienteResponse();
-        response.setCodigo("000"); 
+        response.setCodigo("000");
         response.setMensaje("Cliente registrado exitosamente");
         return response;
     }
@@ -72,7 +73,6 @@ public class ClienteSoapService {
         Cliente cliente = clienteRepository.findById(campos.get(CAMPO_ID))
                 .orElseThrow(() -> new ClienteNotFoundException("No existe el cliente con el ID: " + campos.get(CAMPO_ID)));
 
-        
         cliente.setNombre(campos.get(CAMPO_NOMBRE));
         cliente.setIdentificacion(campos.get(CAMPO_IDENTIFICACION));
         cliente.setTipoIdentificacion(campos.get(CAMPO_TIPO_IDENTIFICACION));
@@ -81,7 +81,7 @@ public class ClienteSoapService {
         clienteRepository.save(cliente);
 
         ActualizarClienteResponse response = new ActualizarClienteResponse();
-        response.setCodigo("000"); 
+        response.setCodigo("000");
         response.setMensaje("Cliente actualizado exitosamente");
         return response;
     }
@@ -90,15 +90,21 @@ public class ClienteSoapService {
     public EliminarClienteResponse eliminarCliente(String trama) {
         List<TramaParametro> parametros = tramaService.getParametrosTrama(CLIENTE_ENTRADA);
         Map<String, String> campos = tramaService.desparametrizarTrama(trama, parametros);
-
+        
+         String dataCliente = campos.get(CAMPO_ID);
+        if (dataCliente.equals(bancoCuentaOficial)) {
+            throw new RuntimeException("No se puede eliminar el cliente oficial del banco");
+        }
+        
+       
         Cliente cliente = clienteRepository.findById(campos.get(CAMPO_ID))
                 .orElseThrow(() -> new ClienteNotFoundException("No existe el cliente con el ID: " + campos.get(CAMPO_ID)));
 
         clienteRepository.delete(cliente);
 
         EliminarClienteResponse response = new EliminarClienteResponse();
-        response.setCodigo("000"); 
-        response.setMensaje("Cliente eliminado exitosamente"); 
+        response.setCodigo("000");
+        response.setMensaje("Cliente eliminado exitosamente");
         return response;
     }
 }
