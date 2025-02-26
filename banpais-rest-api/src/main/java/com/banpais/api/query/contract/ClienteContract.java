@@ -26,6 +26,15 @@ public class ClienteContract {
         }
     }
     
+     public Optional<ClienteQueyModel> getClienteById(String id) {
+        Optional<Cliente> cliente = clienteRepository.findById(id);
+        if (cliente != null) {
+            return Optional.of(Mapper.getInstance().map(cliente, ClienteQueyModel.class));
+        } else {
+            return Optional.empty();
+        }
+    }
+    
     public List<ClienteQueyModel> getAllClientes() {
         List<Cliente> clientes = clienteRepository.findAll();
         return clientes.stream()

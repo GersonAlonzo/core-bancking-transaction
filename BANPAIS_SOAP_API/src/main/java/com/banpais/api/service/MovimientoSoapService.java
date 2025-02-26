@@ -72,24 +72,18 @@ public class MovimientoSoapService {
             System.out.println("Campo: " + key + ", Valor: [" + value + "], Longitud: " + value.length());
         });
 
-        // Obtener y validar tipo de movimiento primero
         TipoMovimiento tipoMovimiento = tipoMovimientoRepository.findByCodigo(camposEntrada.get(CAMPO_TIPO_MOVIMIENTO))
                 .orElseThrow(() -> new TipoMovimientoInvalidoException("Tipo de movimiento inválido: " + camposEntrada.get(CAMPO_TIPO_MOVIMIENTO)));
 
-        // Parsear el monto
         BigDecimal monto = new BigDecimal(camposEntrada.get(CAMPO_MONTO)).setScale(2, RoundingMode.DOWN);
 
-        // Obtener y validar cuentas según el tipo de movimiento
         Cuenta cuentaOrigen = null;
         Cuenta cuentaDestino = null;
-        
-        // Manejar depósitos de forma especial
+
         if (CODIGO_DEPOSITO.equals(tipoMovimiento.getCodigo())) {
-            // Para depósitos, la cuenta origen es la cuenta oficial del banco
             cuentaOrigen = cuentaRepository.findById(bancoCuentaOficial)
                     .orElseThrow(() -> new RuntimeException("Cuenta oficial del banco no encontrada: " + bancoCuentaOficial));
                     
-            // La cuenta destino es obligatoria para depósitos
             if (camposEntrada.get(CAMPO_CUENTA_DESTINO) == null || camposEntrada.get(CAMPO_CUENTA_DESTINO).trim().isEmpty()) {
                 throw new IllegalArgumentException("Para un depósito, se requiere una cuenta destino");
             }
@@ -97,16 +91,13 @@ public class MovimientoSoapService {
             cuentaDestino = cuentaRepository.findById(camposEntrada.get(CAMPO_CUENTA_DESTINO))
                     .orElseThrow(() -> new CuentaNotFoundException("Cuenta destino no encontrada: " + camposEntrada.get(CAMPO_CUENTA_DESTINO)));
         } else {
-            // Para otros tipos de movimiento, obtenemos la cuenta origen normalmente
             cuentaOrigen = cuentaRepository.findById(camposEntrada.get(CAMPO_CUENTA_ORIGEN))
                     .orElseThrow(() -> new CuentaNotFoundException("Cuenta origen no encontrada: " + camposEntrada.get(CAMPO_CUENTA_ORIGEN)));
             
-            // Para retiros, podríamos usar la cuenta del banco como destino
             if (CODIGO_RETIRO.equals(tipoMovimiento.getCodigo())) {
                 cuentaDestino = cuentaRepository.findById(bancoCuentaOficial)
                         .orElseThrow(() -> new RuntimeException("Cuenta oficial del banco no encontrada: " + bancoCuentaOficial));
             } 
-            // Para transferencias, necesitamos una cuenta destino válida
             else if (CODIGO_TRANSFER.equals(tipoMovimiento.getCodigo())) {
                 if (camposEntrada.get(CAMPO_CUENTA_DESTINO) == null || camposEntrada.get(CAMPO_CUENTA_DESTINO).trim().isEmpty()) {
                     throw new IllegalArgumentException("Para una transferencia, se requiere una cuenta destino");
@@ -117,13 +108,12 @@ public class MovimientoSoapService {
             }
         }
 
-        // Validar saldo suficiente para retiros y transferencias
         if ((CODIGO_RETIRO.equals(tipoMovimiento.getCodigo()) || CODIGO_TRANSFER.equals(tipoMovimiento.getCodigo())) &&
             cuentaOrigen.getSaldo().compareTo(monto) < 0) {
             throw new SaldoInsuficienteException("Saldo insuficiente en la cuenta origen: " + cuentaOrigen.getNumeroCuenta());
         }
 
-        // Crear el movimiento
+
         Movimiento movimiento = new Movimiento();
         movimiento.setCuentaOrigen(cuentaOrigen);
         movimiento.setNumeroReferencia(UUID.randomUUID().toString());
@@ -134,7 +124,7 @@ public class MovimientoSoapService {
         movimiento.setTipoMovimiento(tipoMovimiento);
         movimiento.setMonto(monto);
 
-        // Actualizar saldos
+
         if (CODIGO_RETIRO.equals(tipoMovimiento.getCodigo())) {
             cuentaOrigen.setSaldo(cuentaOrigen.getSaldo().subtract(monto));
         } else if (CODIGO_DEPOSITO.equals(tipoMovimiento.getCodigo())) {
@@ -145,24 +135,20 @@ public class MovimientoSoapService {
         }
 
         try {
-            // Guardar las cuentas actualizadas
             cuentaRepository.save(cuentaOrigen);
             if (cuentaDestino != null) {
                 cuentaRepository.save(cuentaDestino);
             }
         } catch (Exception ex) {
             System.out.println("Error al guardar las cuentas: " + ex.getMessage());
-            throw ex; // Re-lanzar para que la transacción se revierta
+            throw ex;
         }
 
-        // Guardar el movimiento
         movimiento = movimientoRepository.save(movimiento);
 
-        // --- Construcción de la respuesta ---
         List<TramaParametro> parametrosSalida = tramaService.getParametrosTrama(MOVIMIENTO_SALIDA);
         Map<String, String> camposSalida = new HashMap<>();
 
-        // Llenar el mapa de salida utilizando directamente las constantes y los valores
         camposSalida.put(CAMPO_CODIGO_RESULTADO, "000");
         camposSalida.put(CAMPO_DESCRIPCION, "Operación exitosa");
         camposSalida.put(CAMPO_NUMERO_REFERENCIA, movimiento.getNumeroReferencia());

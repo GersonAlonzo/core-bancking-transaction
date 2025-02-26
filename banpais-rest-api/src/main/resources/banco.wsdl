@@ -302,7 +302,8 @@
   </wsdl:binding>
   <wsdl:service name="BancoPortService">
     <wsdl:port binding="tns:BancoPortSoap11" name="BancoPortSoap11">
-      <soap:address location="http://localhost:8080/ws"/>
+      <!--<soap:address location="http://localhost:8080/ws"/>-->
+      <soap:address location="http://backend-soap:8080/ws"/>
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

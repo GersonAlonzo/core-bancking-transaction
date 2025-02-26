@@ -69,21 +69,20 @@ public class CuentaSoapService {
         cuenta.setCliente(campos.get(CAMPO_FK_ID_CLIENTE));
         cuenta.setFechaApertura(tramaService.parseLocalDateTime(campos.get(CAMPO_FECHA_APERTURA)));
 
-        //calcular hora de apertura
+
         LocalDateTime fechaHoraApertura = tramaService.parseLocalDateTime(campos.get(CAMPO_FECHA_APERTURA));
         cuenta.setHoraApertura(fechaHoraApertura != null ? fechaHoraApertura.toLocalTime() : null);
 
         cuenta.setEstadoCuenta(EstadoCuenta.ACT.name());
 
-        // Tratamiento del saldo
         cuenta.setSaldo(new BigDecimal(campos.get(CAMPO_SALDO)).setScale(2, RoundingMode.DOWN));
 
         System.out.println("cuenta save" + cuenta.toString());
         cuentaRepository.save(cuenta);
 
         RegistrarCuentaResponse response = new RegistrarCuentaResponse();
-        response.setCodigo("000"); // Considera hacerlo dinámico.
-        response.setMensaje("Cuenta creada exitosamente"); // Considera hacerlo dinámico.
+        response.setCodigo("000"); 
+        response.setMensaje("Cuenta creada exitosamente"); 
         return response;
     }
 
@@ -105,20 +104,18 @@ public class CuentaSoapService {
         cuenta.setCliente(campos.get(CAMPO_FK_ID_CLIENTE));
         cuenta.setFechaApertura(tramaService.parseLocalDateTime(campos.get(CAMPO_FECHA_APERTURA)));
 
-        //calcular hora de apertura
         LocalDateTime fechaHoraApertura = tramaService.parseLocalDateTime(campos.get(CAMPO_FECHA_APERTURA));
         cuenta.setHoraApertura(fechaHoraApertura != null ? fechaHoraApertura.toLocalTime() : null);
 
         cuenta.setEstadoCuenta(EstadoCuenta.ACT.name());
 
-        // Tratamiento del saldo
         cuenta.setSaldo(new BigDecimal(campos.get(CAMPO_SALDO)).setScale(2, RoundingMode.DOWN));
 
         cuentaRepository.save(cuenta);
 
         ActualizarCuentaResponse response = new ActualizarCuentaResponse();
-        response.setCodigo("000");  // Considera hacerlo dinámico.
-        response.setMensaje("Cuenta actualizada exitosamente"); // Considera hacerlo dinámico.
+        response.setCodigo("000"); 
+        response.setMensaje("Cuenta actualizada exitosamente"); 
         return response;
     }
 
@@ -133,8 +130,8 @@ public class CuentaSoapService {
         cuentaRepository.delete(cuenta);
 
         EliminarCuentaResponse response = new EliminarCuentaResponse();
-        response.setCodigo("000"); // todo: hacerlo dinámico.
-        response.setMensaje("Cuenta eliminada exitosamente"); // tido: hacerlo dinámico.
+        response.setCodigo("000"); 
+        response.setMensaje("Cuenta eliminada exitosamente"); 
         return response;
     }
 }

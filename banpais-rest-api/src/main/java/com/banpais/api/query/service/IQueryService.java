@@ -14,6 +14,7 @@ public interface IQueryService {
     
     public Optional<ClienteQueyModel> getClienteByIdentificacion(String identificacion);
     public List<ClienteQueyModel> getAllClientes();
+    public Optional<ClienteQueyModel> getClienteById(String id);
     
     
     

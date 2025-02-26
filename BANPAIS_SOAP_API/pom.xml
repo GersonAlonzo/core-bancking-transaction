@@ -95,11 +95,10 @@
         </dependency>
 
 
-        <!-- Dependencias para SOAP (compatibles con Spring Boot 3.4.2 y Jakarta EE) -->
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web-services</artifactId>
-             <!-- Excluir la dependencia transitiva de spring-boot-starter-tomcat -->
             <exclusions>
                 <exclusion>
                     <groupId>org.springframework.boot</groupId>
@@ -152,7 +151,6 @@
                     </excludes>
                 </configuration>
             </plugin>
-            <!-- Plugin para generar clases Java desde XSD (jaxb2-maven-plugin) -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>jaxb2-maven-plugin</artifactId>

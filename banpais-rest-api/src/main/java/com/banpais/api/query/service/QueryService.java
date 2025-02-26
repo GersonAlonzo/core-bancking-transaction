@@ -77,5 +77,10 @@ public class QueryService implements IQueryService {
        return movimientoQueryContract.getAllMovimientos();
     }
 
+    @Override
+    public Optional<ClienteQueyModel> getClienteById(String id) {
+        return clienteQueryContract.getClienteById(id);
+    }
+
 
 }

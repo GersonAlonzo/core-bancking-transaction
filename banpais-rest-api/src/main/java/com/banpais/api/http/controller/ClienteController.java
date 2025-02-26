@@ -28,9 +28,16 @@ public class ClienteController {
         this.soapClienteClient = soapClienteClient;
     }
 
-    @GetMapping("/{identificacion}")
+    @GetMapping("/document/{identificacion}")
     public ResponseEntity<ClienteQueyModel> getClienteByIdentificacion(@PathVariable String identificacion) {
         return queryService.getClienteByIdentificacion(identificacion)
+                .map(cliente -> ResponseEntity.ok(cliente))
+                .orElse(ResponseEntity.notFound().build());
+    }
+    
+    @GetMapping("/{id}")
+    public ResponseEntity<ClienteQueyModel> getClienteByI(@PathVariable String id) {
+        return queryService.getClienteById(id)
                 .map(cliente -> ResponseEntity.ok(cliente))
                 .orElse(ResponseEntity.notFound().build());
     }

@@ -11,7 +11,7 @@ create table if not exists clientes (
     primary key (id)
 );
 
--- tabla cuentas
+-- tabla cuentas (modificada con ON DELETE CASCADE)
 create table if not exists cuentas (
     numero_cuenta varchar(16) not null,
     fk_id_cliente varchar(36) not null,
@@ -20,10 +20,8 @@ create table if not exists cuentas (
     estado_cuenta varchar(50) not null,
     saldo decimal(15, 2) not null,
     primary key (numero_cuenta),
-    foreign key (fk_id_cliente) references clientes(id)
+    foreign key (fk_id_cliente) references clientes(id) ON DELETE CASCADE
 );
-
-
 
 -- tabla tipos_movimiento
 create table if not exists tipo_movimientos (
@@ -43,8 +41,8 @@ create table if not exists movimientos (
     fk_codigo_movimiento varchar(10) not null,
     monto decimal(15, 2) not null,
     primary key (numero_referencia),
-    foreign key (cuenta_origen) references cuentas(numero_cuenta),
-    foreign key (cuenta_destino) references cuentas(numero_cuenta),
+    foreign key (cuenta_origen) references cuentas(numero_cuenta) ON DELETE CASCADE,
+    foreign key (cuenta_destino) references cuentas(numero_cuenta) ON DELETE CASCADE,
     foreign key (fk_codigo_movimiento) references tipo_movimientos(codigo)
 );
 
@@ -126,7 +124,7 @@ VALUES (
     '1990-01-01'
 );
 
--- insertar cuenta oficial del banco: 
+-- insertar cuenta oficial del banco con la nomenclatura especial: 
 INSERT INTO cuentas(numero_cuenta,fk_id_cliente,fecha_apertura,hora_apertura,estado_cuenta,saldo)
 VALUES(
     'A000000000000001','f47ac10b-58cc-4372-a567-0e02b2c3d472','1990-05-15 14:30:00','14:30:00', 'ACT', '999999999999'
@@ -147,7 +145,7 @@ VALUES (
 
 INSERT INTO cuentas(numero_cuenta, fk_id_cliente, fecha_apertura, hora_apertura, estado_cuenta, saldo)
 VALUES(
-    'A000000000000002', 'a1b2c3d4-e5f6-4a1b-8c2d-123456789abc', '2015-03-10 09:45:00', '09:45:00', 'ACT', '25000.75'
+    '3254167895421563', 'a1b2c3d4-e5f6-4a1b-8c2d-123456789abc', '2015-03-10 09:45:00', '09:45:00', 'ACT', '25000.75'
 );
 
 -- Cliente 2
@@ -162,7 +160,7 @@ VALUES (
 
 INSERT INTO cuentas(numero_cuenta, fk_id_cliente, fecha_apertura, hora_apertura, estado_cuenta, saldo)
 VALUES(
-    'A000000000000003', 'b2c3d4e5-f6a7-5b2c-9d3e-234567890bcd', '2017-08-22 14:15:00', '14:15:00', 'ACT', '18750.50'
+    '9876543210123456', 'b2c3d4e5-f6a7-5b2c-9d3e-234567890bcd', '2017-08-22 14:15:00', '14:15:00', 'ACT', '18750.50'
 );
 
 -- Cliente 3
@@ -177,7 +175,7 @@ VALUES (
 
 INSERT INTO cuentas(numero_cuenta, fk_id_cliente, fecha_apertura, hora_apertura, estado_cuenta, saldo)
 VALUES(
-    'A000000000000004', 'c3d4e5f6-a7b8-6c3d-0e4f-345678901cde', '2010-12-05 11:30:00', '11:30:00', 'ACT', '42800.25'
+    '1234987656781234', 'c3d4e5f6-a7b8-6c3d-0e4f-345678901cde', '2010-12-05 11:30:00', '11:30:00', 'ACT', '42800.25'
 );
 
 -- Cliente 4
@@ -192,7 +190,7 @@ VALUES (
 
 INSERT INTO cuentas(numero_cuenta, fk_id_cliente, fecha_apertura, hora_apertura, estado_cuenta, saldo)
 VALUES(
-    'A000000000000005', 'd4e5f6a7-b8c9-7d4e-1f5a-456789012def', '2020-02-18 15:20:00', '15:20:00', 'ACT', '7500.00'
+    '5678123498765432', 'd4e5f6a7-b8c9-7d4e-1f5a-456789012def', '2020-02-18 15:20:00', '15:20:00', 'ACT', '7500.00'
 );
 
 -- Cliente 5
@@ -207,5 +205,5 @@ VALUES (
 
 INSERT INTO cuentas(numero_cuenta, fk_id_cliente, fecha_apertura, hora_apertura, estado_cuenta, saldo)
 VALUES(
-    'A000000000000006', 'e5f6a7b8-c9d0-8e5f-2g6b-567890123efg', '2012-06-30 10:10:00', '10:10:00', 'ACT', '65320.80'
+    '9876123487654321', 'e5f6a7b8-c9d0-8e5f-2g6b-567890123efg', '2012-06-30 10:10:00', '10:10:00', 'ACT', '65320.80'
 );

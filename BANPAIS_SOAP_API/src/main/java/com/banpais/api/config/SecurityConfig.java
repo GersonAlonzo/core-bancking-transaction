@@ -40,10 +40,8 @@ public class SecurityConfig {
             .csrf(AbstractHttpConfigurer::disable) 
             .authorizeHttpRequests(authz -> authz
                 .requestMatchers("/**").authenticated() 
-                //.requestMatchers("/public/**").permitAll() // Ejemplo: Permite acceso sin autenticación a /public/**
-                //.anyRequest().authenticated()  // Otra forma de proteger todos los endpoints
             )
-            .httpBasic(withDefaults()); // Habilita Basic Auth
+            .httpBasic(withDefaults()); 
         return http.build();
     }
 

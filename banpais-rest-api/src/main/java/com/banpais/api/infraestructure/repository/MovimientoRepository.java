@@ -14,7 +14,7 @@ public interface MovimientoRepository extends JpaRepository<Movimiento, String> 
      
      @Query("SELECT new com.banpais.api.query.model.MovimientoQueyModel(m.numeroReferencia, " +
            "m.cuentaOrigen.numeroCuenta, m.cuentaDestino.numeroCuenta, " +
-           "m.fechaMovimiento, m.monto, m.tipoMovimiento.descripcion) " +
+           "m.fechaMovimiento, m.monto, m.tipoMovimiento.codigo) " +
            "FROM Movimiento m")
     List<MovimientoQueyModel> findAllMovimientosAsDto();
 }

@@ -21,10 +21,8 @@ public class ClienteSoapService {
     private final ClienteRepository clienteRepository;
     private final TramaService tramaService;
 
-    // Constantes para los tipos de transacción
     private static final String CLIENTE_ENTRADA = "CLIENTE_IN";
 
-    // Constantes para los nombres de los campos
     private static final String CAMPO_ID = "ID";
     private static final String CAMPO_NOMBRE = "NOMBRE";
     private static final String CAMPO_IDENTIFICACION = "IDENTIFICACION";
@@ -46,16 +44,13 @@ public class ClienteSoapService {
         Map<String, String> campos = tramaService.desparametrizarTrama(trama, parametros);
         System.out.println(campos);
 
-        // Verificar si ya existe un cliente con la misma identificación
         if (clienteRepository.findByIdentificacion(campos.get(CAMPO_IDENTIFICACION)) != null) {
             throw new DuplicateIdentificacionException("Ya existe un cliente con la identificación: " + campos.get(CAMPO_IDENTIFICACION));
         }
 
-        // Crear y guardar la entidad Cliente
         Cliente cliente = new Cliente();
         cliente.setId(UUID.randomUUID().toString());
 
-        //Asignacion usando constantes directamente
         cliente.setNombre(campos.get(CAMPO_NOMBRE));
         cliente.setIdentificacion(campos.get(CAMPO_IDENTIFICACION));
         cliente.setTipoIdentificacion(campos.get(CAMPO_TIPO_IDENTIFICACION));
@@ -63,10 +58,9 @@ public class ClienteSoapService {
         System.out.println("cliente a guardar" + cliente);
         clienteRepository.save(cliente);
 
-        // Crear la respuesta usando la clase generada
         RegistrarClienteResponse response = new RegistrarClienteResponse();
-        response.setCodigo("000"); //Considera hacerlo dinamico
-        response.setMensaje("Cliente registrado exitosamente"); //Considera hacerlo dinamico
+        response.setCodigo("000"); 
+        response.setMensaje("Cliente registrado exitosamente");
         return response;
     }
 
@@ -78,7 +72,7 @@ public class ClienteSoapService {
         Cliente cliente = clienteRepository.findById(campos.get(CAMPO_ID))
                 .orElseThrow(() -> new ClienteNotFoundException("No existe el cliente con el ID: " + campos.get(CAMPO_ID)));
 
-        //Asignacion usando las constantes directamente
+        
         cliente.setNombre(campos.get(CAMPO_NOMBRE));
         cliente.setIdentificacion(campos.get(CAMPO_IDENTIFICACION));
         cliente.setTipoIdentificacion(campos.get(CAMPO_TIPO_IDENTIFICACION));
@@ -87,8 +81,8 @@ public class ClienteSoapService {
         clienteRepository.save(cliente);
 
         ActualizarClienteResponse response = new ActualizarClienteResponse();
-        response.setCodigo("000"); //todo: hacerlo dinamico
-        response.setMensaje("Cliente actualizado exitosamente"); //todo: hacerlo dinamico
+        response.setCodigo("000"); 
+        response.setMensaje("Cliente actualizado exitosamente");
         return response;
     }
 
@@ -103,8 +97,8 @@ public class ClienteSoapService {
         clienteRepository.delete(cliente);
 
         EliminarClienteResponse response = new EliminarClienteResponse();
-        response.setCodigo("000");  //todo: hacerlo dinamico
-        response.setMensaje("Cliente eliminado exitosamente"); //todo: hacerlo dinamico
+        response.setCodigo("000"); 
+        response.setMensaje("Cliente eliminado exitosamente"); 
         return response;
     }
 }

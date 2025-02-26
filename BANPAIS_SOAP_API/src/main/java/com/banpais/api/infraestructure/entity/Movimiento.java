@@ -30,7 +30,7 @@ public class Movimiento implements Serializable {
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "CUENTA_DESTINO",nullable = false)
-    private Cuenta cuentaDestino; // Puede ser null en caso de un retiro
+    private Cuenta cuentaDestino;
 
     @NotNull
     @Column(name = "FECHA_MOVIMIENTO", nullable = false)
