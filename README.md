@@ -1,4 +1,4 @@
-# 📦 Proyecto Transaccional Banpais: API SOAP, API REST y Frontend
+# 📦 Proyecto Transaccional: API SOAP, API REST y Frontend
 
 [![Java](https://img.shields.io/badge/Java-17-blue?style=for-the-badge&logo=java)](https://www.java.com/)
 [![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.4.3-green?style=for-the-badge&logo=springboot)](https://spring.io/projects/spring-boot)
@@ -111,8 +111,7 @@ banpais-transactional-project/
 1. **Clonar el Repositorio:**
 
    ```bash
-   git clone https://github.com/YourUsername/banpais-transactional-project.git
-   cd ./banpais-transactional-project
+   git clone https://github.com/YourUsername/banpais-transactional-project.git ; cd ./banpais-transactional-project
    ```
 
 2. **Ejecutar con Docker Compose:**
@@ -130,22 +129,27 @@ banpais-transactional-project/
    * Puerto: 3306
    * Usuario: root
    * Contraseña: root
+   
+    ![image](https://github.com/user-attachments/assets/7dd8f956-a8bb-4abb-8a0e-c4f7fd27c25a)
+
 
 4. **Validar la estabilidad del proyecto:**
    
-   Asegurarse que todos los contenedores estén funcionando correctamente por al menos 2 minutos:
+   Asegurarse que todos los contenedores estén funcionando correctamente por al menos 3-4 minutos:
+   ![image](https://github.com/user-attachments/assets/15e93f8d-31d2-420c-a34d-282f26cd4374)
+
    
    ```bash
    docker-compose ps
    ```
 
-5. **Acceder a la Aplicación:**
+6. **Acceder a la Aplicación:**
 
-   * **Frontend:** Abre tu navegador y ve a `http://localhost:5173` (o el puerto configurado)
+   * **Frontend:** Abre tu navegador y ve a `http://localhost:5173` 
    * **Backend REST (Swagger UI):** `http://localhost:8080/swagger-ui.html`
    * **Backend SOAP (Swagger UI):** `http://localhost:8080/ws/banco.wsdl`
 
-6. **Detener los Contenedores:**
+7. **Detener los Contenedores:**
 
    ```bash
    docker-compose down
@@ -153,7 +157,7 @@ banpais-transactional-project/
 
    Esto detendrá y eliminará los contenedores y la red.
 
-7. **Detener los Contenedores y Eliminar Volúmenes:**
+8. **Detener los Contenedores y Eliminar Volúmenes:**
 
    ```bash
    docker-compose down -v

@@ -218,7 +218,7 @@ const MovimientoForm = () => {
                       onClick={() => handleSelectCuentaOrigen(cuenta)}
                     >
                       <span>{cuenta.numeroCuenta}</span>
-                      <span className="text-gray-600">Saldo: ${cuenta.saldo?.toFixed(2) || '0.00'}</span>
+                      {/* <span className="text-gray-600">Saldo: ${cuenta.saldo?.toFixed(2) || '0.00'}</span> */}
                     </div>
                   ))}
                 </div>
@@ -261,7 +261,7 @@ const MovimientoForm = () => {
                       onClick={() => handleSelectCuentaDestino(cuenta)}
                     >
                       <span>{cuenta.numeroCuenta}</span>
-                      <span className="text-gray-600">Saldo: ${cuenta.saldo?.toFixed(2) || '0.00'}</span>
+                      {/* <span className="text-gray-600">Saldo: ${cuenta.saldo?.toFixed(2) || '0.00'}</span> */}
                     </div>
                   ))}
                 </div>
