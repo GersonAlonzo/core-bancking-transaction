@@ -111,7 +111,7 @@ banpais-transactional-project/
 1. **Clonar el Repositorio:**
 
    ```bash
-   git clone https://github.com/YourUsername/banpais-transactional-project.git ; cd ./banpais-transactional-project
+   git clone https://github.com/GersonAlonzo/core-bancking-transaction ; cd ./core-bancking-transaction
    ```
 
 2. **Ejecutar con Docker Compose:**
