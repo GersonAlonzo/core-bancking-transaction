@@ -146,25 +146,6 @@ const ClienteForm = () => {
           )}
         </div>
         
-        {/* Campo Tipo de Identificación */}
-        <div className="form-group">
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            Tipo de Identificación
-          </label>
-          <select
-            className={`w-full border ${errors.tipoIdentificacion ? 'border-red-500' : 'border-gray-300'} rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500`}
-            {...register('tipoIdentificacion', { 
-              required: 'El tipo de identificación es obligatorio'
-            })}
-          >
-            <option value="CI">Cédula de Identidad (CI)</option>
-            <option value="PA">Pasaporte (PA)</option>
-            <option value="OT">Otro</option>
-          </select>
-          {errors.tipoIdentificacion && (
-            <p className="mt-1 text-sm text-red-600">{errors.tipoIdentificacion.message}</p>
-          )}
-        </div>
         
         {/* Campo Fecha de Nacimiento */}
         <div className="form-group">
